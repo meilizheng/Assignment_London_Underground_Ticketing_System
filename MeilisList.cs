@@ -20,7 +20,8 @@ namespace Assignment_London_Underground_Ticketing_System
         }
         public int Count => _count;
 
-        public void Add(T item)
+        //Add element
+        public void Add(T item) 
         {
             if (_count == _items.Length)
             {
@@ -31,7 +32,7 @@ namespace Assignment_London_Underground_Ticketing_System
             _count++;
         }
 
-        private void ResizeArray()
+        private void ResizeArray() //Resize the Array
         {
             int newCapacity = _items.Length * 2; // Double the capacity
             T[] newArray = new T[newCapacity];

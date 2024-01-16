@@ -42,32 +42,44 @@ namespace Assignment_London_Underground_Ticketing_System
             }
         }
 
-        //Created the Add metod
+        //Created the Add metod to add new custom
         public void Add(T custom)
         {
+            //Check Array size first
             CheckIntegrity();
             customs[count++] = custom;
         }
 
-        public void AddAtIndex(T custom, int index)
+        // Add custom element at the specified index.
+        public void AddAtIndex(T custom, int index) 
         {
-            CheckIntegrity();
+            CheckIntegrity(); //check array size
+
+            // Throw an exception if the index is out of the valid range.
             if (index < 0 || index > count) throw new IndexOutOfRangeException(nameof(index));
+
+            //Use for loop to make space for the new insert element
             for (int i = count; i > index; i--)
             {
                 customs[i] = customs[i - 1];
             }
+
+            // Inert the new element at the specified index
             customs[index] = custom;
             count++;
         }
 
+        //Remove the element at the specified index
         public void RemoveAtIndex(int index)
         {
+            //Use for loop to remove the specified index
             for (int i = 0; i < count; i++)
             {
+                //If current index equals the specified index
                 if (i == index)
                 {
-                    for (int j = i; j < count - 1; j++)
+                    //Remove space forward
+                    for (int j = i; j < count - 1; j++) 
                     {
                         customs[j] = customs[j + 1];
                     }
