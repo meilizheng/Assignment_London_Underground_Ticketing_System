@@ -9,7 +9,7 @@
     Title="MainWindow"
     Height="650"
     Width="800">
-    <Grid>
+    <Grid Background="#FF6F9665">
         <Grid.RowDefinitions>
             <RowDefinition
                 Height="Auto" />
@@ -24,7 +24,7 @@
             Grid.Row="0"
             Name="lvRiders"
             Margin="10"
-            Height="250">
+            Height="250" Background="#FF3D5D39" Foreground="#FF0D0D0E">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
@@ -54,7 +54,7 @@
             Margin="10">
             <Label
                 Content="Search Station:"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" Background="#FFCCDABB" />
             <ComboBox
                 Name="cmbSearchStation"
                 Width="120"
@@ -63,23 +63,23 @@
                 Content="Search"
                 Width="100"
                 Click="OnSearchStation"
-                Margin="5,0" />
+                Margin="5,0" Background="#FFD2DEC0" />
             <Label
                 Content="Active Travelers:"
                 VerticalAlignment="Center"
-                Margin="20,0,0,0" />
+                Margin="20,0,0,0" Background="#FFD6E2BF" />
             <Button
                 Content="Show Active"
                 Width="100"
                 Click="OnShowActive"
-                Margin="5,0" />
+                Margin="5,0" Background="#FFC6DCAC" />
 
             <!-- New Clear Button -->
             <Button
                 Content="Clear List"
                 Width="100"
                 Click="OnClearList"
-                Margin="5,0" />
+                Margin="5,0" Background="#FFC1D8A5" />
         </StackPanel>
 
         <!-- Filtered Riders ListView -->
@@ -87,7 +87,7 @@
             Grid.Row="2"
             Name="lvFilteredRiders"
             Margin="10"
-            Height="250">
+            Height="250" Background="#FF0B655B" Foreground="#FF0B0B0C">
             <ListView.View>
                 <GridView>
                     <GridViewColumn

@@ -20,46 +20,70 @@ namespace Assignment_London_Underground_Ticketing_System
         // Replace "WillsList" with your Custom List name in 2 places.
         // 1. Replace here
         // Example YourList<Ride> Riders
-        public WillsList<Rider> Riders;
+        public MeilisList<Rider> Riders;
+        public MeilisList<Rider> NewRiders;
 
-        int numberOfRiders = 10; // Changes this to something higher than 100 to check your list is working
+        int numberOfRiders = 100; // Changes this to something higher than 100 to check your list is working
 
         public MainWindow()
         {
             InitializeComponent();
             InitializeRiders();
+
             cmbSearchStation.ItemsSource = Enum.GetValues(typeof(Station));
 
-
             lvRiders.ItemsSource = Riders;
+
+            NewRiders = new MeilisList<Rider>();
         } // MainWindow
 
         private void OnSearchStation(object sender, RoutedEventArgs e)
         {
-            var searchStation = cmbSearchStation.SelectedIndex;
-
+            var searchStation = (Station)cmbSearchStation.SelectedItem;
+            // Clear previous results
+            NewRiders = new MeilisList<Rider>();
             // Enter code here to show all riders who started there ride from the selected station
-
-            // lvRiders.ItemsSource = YourReturnedResults;
+            foreach (var rider in Riders)
+            {   //if the rider's stationOn equals the selected Station, add the rider to the NewRiders list
+                if (rider.StationOn == searchStation)
+                {
+                    NewRiders.Add(rider);
+                }
+            }
+            //Display NewRiders List in listview box.
+            lvFilteredRiders.ItemsSource = NewRiders;
         } // OnSearchStation
 
         private void OnShowActive(object sender, RoutedEventArgs e)
         {
+            // Clear previous results
+            NewRiders = new MeilisList<Rider>();
             // Enter code here to display all riders currently riding the underground
-
-            // lvRiders.ItemsSource = YourReturnedResults;
+            foreach (var rider in Riders)
+            {   //if rider StationOf is active 
+                if (rider.IsActive)
+                {
+                    //Add the rider to the NewRiders List
+                    NewRiders.Add(rider);
+                }
+            }
+            //Display the NewRiders list in FilteradRiders 
+            lvFilteredRiders.ItemsSource = NewRiders;
         } // OnShowActive
 
         private void OnClearList(object sender, RoutedEventArgs e)
         {
-            lvFilteredRiders.Items.Clear();
+            //Clear previous results
+            NewRiders = new MeilisList<Rider>();
+            //Clear FilteredRiders list.
+            lvFilteredRiders.ItemsSource = null;
         }
 
         private void InitializeRiders()
         {
             // 2. And here
             // Ex Riders = new YourList<Rider>();
-            Riders = new WillsList<Rider>();
+            Riders = new MeilisList<Rider>();
             Random rnd = new Random();
             HashSet<int> usedNumbers = new HashSet<int>();
 
@@ -79,10 +103,7 @@ namespace Assignment_London_Underground_Ticketing_System
 
                 Riders.Add(new Rider(uniqueNumber, stationOn, stationOff));
             }
-
-        } // Initialize Riders
-
-    
+        } // Initialize Rider
 
     } //class
 
